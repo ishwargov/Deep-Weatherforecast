@@ -60,7 +60,7 @@ india_data = pd.read_csv('./Monthly PPT(1901-2015)/ID_LAT_LON(4964)/ID_4964.csv'
 indiamodels = []
 combinations = []
 
-dat = pd.read_csv('/content/data/Data/Monthly PPT(1901-2015)/ID_LAT_LON(4964)/ID_4964.csv')
+dat = pd.read_csv('./Monthly PPT(1901-2015)/ID_LAT_LON(4964)/ID_4964.csv')
 id_to_latlon = {}
 latlon_to_id = {}
 xmx,xmn,ymx,ymn = dat.iloc[:,1].max()*4,dat.iloc[:,1].min()*4,dat.iloc[:,2].max()*4,dat.iloc[:,2].min()*4
