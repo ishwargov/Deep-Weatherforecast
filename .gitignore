@@ -1,3 +1,9 @@
+# PPT FOLDERS
+Monthly PPT(1901-2015)/
+Regional grid points/
+ENSO_PDO_AMO.csv
+elevation.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
