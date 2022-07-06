@@ -1,5 +1,6 @@
 import argparse
 import run_convlstm
+import run_convlstm2
 import run_lstm
 
 def main():
@@ -13,7 +14,8 @@ def main():
         run_convlstm.run(args.clip,7,args.epoch,args.horizon)
     if(args.model=='lstm'):
         run_lstm.run(args.clip,args.epoch,args.horizon)
-
+    if(args.model=='convlstm2'):
+        run_convlstm.run()
 
 if __name__ == "__main__":
     main()
