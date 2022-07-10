@@ -15,7 +15,7 @@ def main():
     if(args.model=='lstm'):
         run_lstm.run(args.clip,args.epoch,args.horizon)
     if(args.model=='convlstm2'):
-        run_convlstm.run(args.epoch)
+        run_convlstm2.run(args.epochs)
 
 if __name__ == "__main__":
     main()

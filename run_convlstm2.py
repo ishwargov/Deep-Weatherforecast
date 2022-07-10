@@ -203,10 +203,11 @@ def build_model():
     return model
 
 
-def run(epoch=20):
+def run(epoch = 20):
     os.system(f'mkdir ./saved_models')
     os.system(f'mkdir ./model_output')
-    f = open(f'model_output.txt', 'wa')
+    f = open(f'model_output.txt', 'a')
+    f.write(f'{time.strftime("%d/%m/%Y %H:%M:%S")}\n')
     for i in range(len(blocks)):
         model = build_model()
         model.compile(
