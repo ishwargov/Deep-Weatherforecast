@@ -1,4 +1,3 @@
-from ConvLSTM2 import ConvLSTM2
 from distutils.command.build_clib import build_clib
 import pandas as pd
 import numpy as np
@@ -23,6 +22,7 @@ from sklearn.metrics import mean_absolute_error
 from pandas.plotting import lag_plot
 from pandas.plotting import autocorrelation_plot
 from sklearn.metrics import mean_squared_error
+from ConvLSTM2 import ConvLSTM2
 np.random.seed(42)
 
 
@@ -97,7 +97,7 @@ def make_2d(dat, grid_data, lsci, choice):
 
 grid = make_2d(india_data, grid_data, lsci, 0)
 
-grid_pad = np.pad(grid, ((15, 15), (15, 15), (0, 0), (0, 0)),
+grid_pad = np.pad(grid, ((17, 17), (17, 17), (0, 0), (0, 0)),
                   mode='constant', constant_values=((0, 0), (0, 0), (0, 0), (0, 0)))
 
 blocks = []
@@ -203,11 +203,12 @@ def build_model():
     return model
 
 
-def run():
+def run(epoch=20):
+    os.system(f'mkdir ./saved_models')
+    os.system(f'mkdir ./model_output')
+    f = open(f'model_output.txt', 'wa')
     for i in range(len(blocks)):
-
         model = build_model()
-
         model.compile(
             loss="mae", optimizer='adam', metrics=["mae", "mse"]
         )
@@ -220,16 +221,18 @@ def run():
             monitor="val_loss", patience=6)
         reduce_lr = keras.callbacks.ReduceLROnPlateau(
             monitor="val_loss", patience=3)
-        epochs = 20
         batch_size = 5
         filename = 'convmodel_new'+str(i)+'.h5'
         hist = model.fit(
             x_train,
             y_train,
             batch_size=batch_size,
-            epochs=epochs,
+            epochs=epoch,
             validation_split=0.3,
             callbacks=[early_stopping, reduce_lr],
         )
         model.save(filename)
+        f.write(f"Model{i} MAE error = {model.evaluate(x_test,y_test)}")
         os.system(f"mv ./{filename} ./saved_models")
+    f.close()
+    os.system(f"mv ./model_output.txt ./model_output")
