@@ -123,7 +123,7 @@ def make_data(blocks, grid_pad, block_num, horizon):
     p, q = block_to_latlon[block_num]
     for i in range(block.shape[3]-horizon):
         x.append(np.rollaxis(
-            grid[(p-9):(p+19), (q-9):(q+19), :, i:i+12], 3, 0))
+            grid_pad[(p-9):(p+19), (q-9):(q+19), :, i:i+12], 3, 0))
         y.append(block[:, :, :, i+12])
     return(np.array(x), np.array(y))
 
