@@ -233,7 +233,7 @@ def run(epoch = 20):
             callbacks=[early_stopping, reduce_lr],
         )
         model.save(filename)
-        f.write(f"Model{i} MAE error = {model.evaluate(x_test,y_test)}")
+        f.write(f"Model{i} error = {model.evaluate(x_test,y_test)} \n")
         os.system(f"mv ./{filename} ./saved_models")
     f.close()
     os.system(f"mv ./model_output.txt ./model_output")
