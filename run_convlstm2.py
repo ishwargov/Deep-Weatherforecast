@@ -97,7 +97,7 @@ def make_2d(dat, grid_data, lsci, choice):
 
 grid = make_2d(india_data, grid_data, lsci, 0)
 
-grid_pad = np.pad(grid, ((17, 17), (17, 17), (0, 0), (0, 0)),
+grid_pad = np.pad(grid, ((20, 20), (20, 20), (0, 0), (0, 0)),
                   mode='constant', constant_values=((0, 0), (0, 0), (0, 0), (0, 0)))
 
 blocks = []
@@ -115,6 +115,7 @@ for i in range(0, grid_pad.shape[0], 10):
         latlon_to_block[(i, j)] = cnt
         cnt += 1
 
+print(grid_pad.shape,len(blocks))
 
 def make_data(blocks, grid_pad, block_num, horizon):
     x = []
