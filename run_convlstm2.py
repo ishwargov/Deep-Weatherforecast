@@ -115,7 +115,8 @@ for i in range(0, grid_pad.shape[0], 10):
         latlon_to_block[(i, j)] = cnt
         cnt += 1
 
-print(grid_pad.shape,len(blocks))
+print(grid_pad.shape, len(blocks))
+
 
 def make_data(blocks, grid_pad, block_num, horizon):
     x = []
@@ -204,7 +205,7 @@ def build_model():
     return model
 
 
-def run(epoch = 20):
+def run(epoch=20):
     os.system(f'mkdir ./saved_models')
     os.system(f'mkdir ./model_output')
     f = open(f'model_output.txt', 'a')
@@ -231,7 +232,6 @@ def run(epoch = 20):
             batch_size=batch_size,
             epochs=epoch,
             validation_split=0.3,
-            callbacks=[early_stopping, reduce_lr],
         )
         model.save(filename)
         f.write(f"Model{i} error = {model.evaluate(x_test,y_test)} \n")
